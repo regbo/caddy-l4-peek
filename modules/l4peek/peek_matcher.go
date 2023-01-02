@@ -24,7 +24,7 @@ type PeekPrefixPattern struct {
 }
 
 type peekFilter struct {
-	read uint32
+	read int
 	fn   func([]byte) bool
 }
 
@@ -37,26 +37,24 @@ func (PeekMatcher) CaddyModule() caddy.ModuleInfo {
 
 func (m *PeekMatcher) Provision(_ caddy.Context) error {
 	for _, prefix := range m.PeekPrefixes {
-		read := len(prefix)
-		if read == 0 {
+		if prefix == "" {
 			continue
 		}
 		prefixBuf := []byte(prefix)
-		m.peekFilters = append(m.peekFilters, peekFilter{uint32(read), func(buf []byte) bool {
+		m.peekFilters = append(m.peekFilters, peekFilter{len(prefixBuf), func(buf []byte) bool {
 			return bytes.HasPrefix(buf, prefixBuf)
 		}})
 	}
 	for _, prefixPattern := range m.PeekPrefixPatterns {
-		pattern := prefixPattern.Pattern
-		if pattern == "" {
+		if prefixPattern.Pattern == "" {
 			continue
 		}
-		regexp := regexp.MustCompile(pattern)
+		regexp := regexp.MustCompile(prefixPattern.Pattern)
 		read := prefixPattern.MaxRead
 		if read == 0 {
 			read = maxReadDefault
 		}
-		m.peekFilters = append(m.peekFilters, peekFilter{uint32(read), func(buf []byte) bool {
+		m.peekFilters = append(m.peekFilters, peekFilter{int(read), func(buf []byte) bool {
 			return regexp.Match(buf)
 		}})
 	}
@@ -69,7 +67,7 @@ func (m *PeekMatcher) Match(cx *layer4.Connection) (bool, error) {
 	var buf []byte
 	for _, peekFilter := range m.peekFilters {
 		if readTotal >= 0 {
-			size := int(peekFilter.read) - readTotal
+			size := peekFilter.read - readTotal
 			if size > 0 {
 				p := make([]byte, size)
 				n, err := io.ReadFull(cx, p)
@@ -79,8 +77,8 @@ func (m *PeekMatcher) Match(cx *layer4.Connection) (bool, error) {
 					return false, nil
 				} else {
 					readTotal += n
-					buf = append(buf, p...)
 				}
+				buf = append(buf, p[:n]...)
 			}
 		}
 		if peekFilter.fn(buf) {
