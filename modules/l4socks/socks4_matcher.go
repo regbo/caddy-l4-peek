@@ -4,7 +4,7 @@ import (
 	"encoding/binary"
 	"fmt"
 	"github.com/caddyserver/caddy/v2"
-	"github.com/mholt/caddy-l4/layer4"
+	"github.com/regbo/caddy-l4-peek/layer4"
 	"io"
 	"net"
 	"strings"

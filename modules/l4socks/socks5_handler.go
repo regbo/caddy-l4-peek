@@ -3,7 +3,7 @@ package l4socks
 import (
 	"fmt"
 	"github.com/caddyserver/caddy/v2"
-	"github.com/mholt/caddy-l4/layer4"
+	"github.com/regbo/caddy-l4-peek/layer4"
 	"github.com/things-go/go-socks5"
 	"go.uber.org/zap"
 	"net"

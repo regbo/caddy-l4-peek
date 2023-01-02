@@ -440,6 +440,8 @@ github.com/mgutz/ansi v0.0.0-20200706080929-d51e80ef957d h1:5PJl274Y63IEHC+7izoQ
 github.com/mgutz/ansi v0.0.0-20200706080929-d51e80ef957d/go.mod h1:01TrycV0kFyexm33Z7vhZRXopbI8J3TDReVlkTgMUxE=
 github.com/mholt/acmez v1.0.4 h1:N3cE4Pek+dSolbsofIkAYz6H1d3pE+2G0os7QHslf80=
 github.com/mholt/acmez v1.0.4/go.mod h1:qFGLZ4u+ehWINeJZjzPlsnjJBCPAADWTcIqE/7DAYQY=
+github.com/mholt/caddy-l4 v0.0.0-20221205182150-121f2ada2481 h1:LFHqPDtA9RKGYmwv1CxFO8DZOkcxg8bmJvOKRPY2C+s=
+github.com/mholt/caddy-l4 v0.0.0-20221205182150-121f2ada2481/go.mod h1:KyuSFkbhd+jv3LmWxQhPSvZM5/cFj7VU2TASyDvpoNg=
 github.com/micromdm/scep/v2 v2.1.0 h1:2fS9Rla7qRR266hvUoEauBJ7J6FhgssEiq2OkSKXmaU=
 github.com/micromdm/scep/v2 v2.1.0/go.mod h1:BkF7TkPPhmgJAMtHfP+sFTKXmgzNJgLQlvvGoOExBcc=
 github.com/miekg/dns v1.0.14/go.mod h1:W1PPwlIAgtquWBMBEV9nkV9Cazfe8ScdGz/Lj7v3Nrg=

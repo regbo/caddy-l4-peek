@@ -1,4 +1,5 @@
-module github.com/mholt/caddy-l4
+//module github.com/mholt/caddy-l4
+module github.com/regbo/caddy-l4-peek
 
 go 1.18
 
