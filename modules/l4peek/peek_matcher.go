@@ -78,7 +78,11 @@ func (m *PeekMatcher) Match(cx *layer4.Connection) (bool, error) {
 				} else {
 					readTotal += n
 				}
-				buf = append(buf, p[:n]...)
+				if n == size {
+					buf = append(buf, p...)
+				} else if n > 0 {
+					buf = append(buf, p[:n]...)
+				}
 			}
 		}
 		if peekFilter.fn(buf) {
