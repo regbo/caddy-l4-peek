@@ -71,7 +71,7 @@ func (m *PeekMatcher) Match(cx *layer4.Connection) (bool, error) {
 			if size > 0 {
 				p := make([]byte, size)
 				n, err := io.ReadFull(cx, p)
-				if n < size || io.ErrUnexpectedEOF == err {
+				if io.EOF == err || io.ErrUnexpectedEOF == err || n < size {
 					readTotal = -1
 				} else if err != nil {
 					return false, nil
